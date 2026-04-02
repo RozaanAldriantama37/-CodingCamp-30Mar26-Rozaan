@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Expense & Budget Visualizer</title>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <!-- Font Awesome (opsional, untuk ikon) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header dengan dark mode toggle -->
+    <header class="app-header">
+      <h1>💰 Expense & Budget Visualizer</h1>
+      <button id="darkModeToggle" class="dark-mode-btn" aria-label="Toggle dark mode">
+        <i class="fas fa-moon"></i> <span>Dark Mode</span>
+      </button>
+    </header>
+
+    <!-- Total Spending -->
+    <div class="total-card">
+      <h2>Total Pengeluaran</h2>
+      <div class="total-amount" id="totalBalance">Rp 0</div>
+    </div>
+
+    <!-- Form Input -->
+    <div class="form-card">
+      <h3>Tambah Transaksi</h3>
+      <form id="transactionForm">
+        <div class="form-group">
+          <label for="itemName">Nama Item</label>
+          <input type="text" id="itemName" placeholder="Misal: Makan Siang" required>
+        </div>
+        <div class="form-group">
+          <label for="amount">Jumlah (Rp)</label>
+          <input type="number" id="amount" placeholder="10000" min="0" step="1000" required>
+        </div>
+        <div class="form-group">
+          <label for="category">Kategori</label>
+          <select id="category" required>
+            <option value="">-- Pilih Kategori --</option>
+            <!-- Kategori default + custom akan diisi JS -->
+          </select>
+          <div class="custom-category-group">
+            <input type="text" id="newCategory" placeholder="Nama kategori baru">
+            <button type="button" id="addCategoryBtn" class="btn-secondary">+ Tambah Kategori</button>
+          </div>
+        </div>
+        <button type="submit" class="btn-primary">Tambah Transaksi</button>
+      </form>
+    </div>
+
+    <!-- Kontrol Sorting -->
+    <div class="sort-control">
+      <label for="sortSelect">Urutkan transaksi:</label>
+      <select id="sortSelect">
+        <option value="default">Default (terbaru dulu)</option>
+        <option value="amount_asc">Jumlah: Terendah ke Tertinggi</option>
+        <option value="amount_desc">Jumlah: Tertinggi ke Terendah</option>
+        <option value="category_asc">Kategori A-Z</option>
+      </select>
+    </div>
+
+    <!-- Daftar Transaksi (scrollable) -->
+    <div class="transaction-list-container">
+      <h3>Daftar Transaksi</h3>
+      <div id="transactionList" class="transaction-list">
+        <!-- List item akan diisi JS -->
+        <div class="empty-state">Belum ada transaksi. Tambahkan sekarang!</div>
+      </div>
+    </div>
+
+    <!-- Chart Visual -->
+    <div class="chart-container">
+      <h3>Distribusi Pengeluaran per Kategori</h3>
+      <canvas id="expenseChart" width="400" height="400"></canvas>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
